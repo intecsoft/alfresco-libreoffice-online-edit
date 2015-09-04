@@ -27,8 +27,8 @@ public class LibreOfficeLauncherHelperTest {
   @Test
   public void testGenerateLibreOfficeOpenUrl() throws UnsupportedEncodingException {
     assertEquals("vnd.libreoffice.cmis://http%3A%2F%2Flocalhost%3A8080%2Falfresco%2Fcmisatom%23be392f77-bc41-4794-9367-f5b1cf00984b/Sites/libreoffice-test/documentLibrary/Testdocument.odt",
-        LibreOfficeLauncherHelper.generateLibreOfficeOpenUrl("http://localhost:8080/alfresco/cmisatom", "be392f77-bc41-4794-9367-f5b1cf00984b",
-            "/Sites/libreoffice-test/documentLibrary/Testdocument.odt"));
+        LibreOfficeLauncherHelper.generateLibreOfficeCmisOpenUrl("http://localhost:8080/alfresco/cmisatom", "be392f77-bc41-4794-9367-f5b1cf00984b",
+                "/Sites/libreoffice-test/documentLibrary/Testdocument.odt"));
   
   
   }

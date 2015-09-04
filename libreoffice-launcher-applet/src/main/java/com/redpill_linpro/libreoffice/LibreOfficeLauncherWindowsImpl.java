@@ -22,6 +22,8 @@
 
 package com.redpill_linpro.libreoffice;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -37,17 +39,23 @@ import javax.swing.JOptionPane;
 public class LibreOfficeLauncherWindowsImpl implements LibreOfficeLauncher {
 
   @Override
-  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath) {
+  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath, String webdavUrl) {
     Runtime rt = Runtime.getRuntime();
     try {
-      String params = LibreOfficeLauncherHelper.generateLibreOfficeOpenUrl(cmisUrl, repositoryId, filePath);
+      String params;
+      if (null != webdavUrl && webdavUrl.length() > 0) {
+        params = LibreOfficeLauncherHelper.generateLibreOfficeWebdavOpenUrl(webdavUrl);
+      } else {
+        params = LibreOfficeLauncherHelper.generateLibreOfficeCmisOpenUrl(cmisUrl, repositoryId, filePath);
+      }
 
       StringBuffer cmd = new StringBuffer();
       try {
         String[] binaryLocations = { "start soffice.exe" };
 
-        for (int i = 0; i < binaryLocations.length; i++)
+        for (int i = 0; i < binaryLocations.length; i++) {
           cmd.append((i == 0 ? "" : " || ") + binaryLocations[i] + " \"" + params + "\" ");
+        }
 
         System.out.println("Command: cmd.exe /C " + cmd);
         

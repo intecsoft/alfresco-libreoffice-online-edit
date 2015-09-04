@@ -38,5 +38,5 @@ public interface LibreOfficeLauncher {
    * @param repositoryId
    * @param filePath
    */
-  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath);
+  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath, String webdavUrl);
 }

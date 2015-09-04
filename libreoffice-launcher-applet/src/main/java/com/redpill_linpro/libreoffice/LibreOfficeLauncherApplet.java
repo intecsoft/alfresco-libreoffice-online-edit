@@ -66,15 +66,22 @@ public class LibreOfficeLauncherApplet extends Applet {
     String filePath;
     String cmisUrl;
 
+    String webdavUrl;
+
     cmisUrl = getParameter("ALF_CMIS_URL");
     repositoryId = getParameter("ALF_REPOSITORY_ID");
     filePath = getParameter("ALF_FILE_PATH");
+
+    webdavUrl = getParameter("WEBDAV_URL");
 
     System.out.println("Starting LibreOffice");
     System.out.println("ALF_CMIS_URL:" + cmisUrl);
     System.out.println("ALF_REPOSITORY_ID:" + repositoryId);
     System.out.println("ALF_FILE_PATH:" + filePath);
-    libreOfficeLauncher.launchLibreOffice(cmisUrl, repositoryId, filePath);
+
+    System.out.println("WEBDAV_URL:" + webdavUrl);
+
+    libreOfficeLauncher.launchLibreOffice(cmisUrl, repositoryId, filePath, webdavUrl);
   }
 
   public LibreOfficeLauncher getLibreOfficeLauncher() {

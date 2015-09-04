@@ -23,6 +23,7 @@
 package com.redpill_linpro.libreoffice;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
@@ -77,7 +78,7 @@ public class LibreOfficeLauncherHelper {
    * @return
    * @throws UnsupportedEncodingException
    */
-  public static String generateLibreOfficeOpenUrl(String cmisUrl, String repositoryId, String filePath) throws UnsupportedEncodingException {
+  public static String generateLibreOfficeCmisOpenUrl(String cmisUrl, String repositoryId, String filePath) throws UnsupportedEncodingException {
     StringBuilder openUrlSb = new StringBuilder();
     openUrlSb.append(LibreOfficeLauncherHelper.LIBREOFFICE_HANDLER);
     openUrlSb.append("://");
@@ -90,6 +91,14 @@ public class LibreOfficeLauncherHelper {
     String urlEncodedString = URLEncoder.encode(cmisUrlSb.toString(), "UTF-8").replaceAll("\\+", "%20");
 
     openUrlSb.append(urlEncodedString + filePath);
+    return openUrlSb.toString();
+
+  }
+
+  public static String generateLibreOfficeWebdavOpenUrl(final String webdavUrl) throws UnsupportedEncodingException {
+    final StringBuilder openUrlSb = new StringBuilder();
+    final String urlDecodedString = URLDecoder.decode(webdavUrl, "UTF-8");
+    openUrlSb.append(urlDecodedString);
     return openUrlSb.toString();
 
   }

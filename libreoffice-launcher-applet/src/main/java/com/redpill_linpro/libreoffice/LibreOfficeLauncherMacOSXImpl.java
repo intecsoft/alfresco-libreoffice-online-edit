@@ -22,6 +22,8 @@
 
 package com.redpill_linpro.libreoffice;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -37,16 +39,21 @@ import javax.swing.JOptionPane;
 public class LibreOfficeLauncherMacOSXImpl implements LibreOfficeLauncher {
 
   @Override
-  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath) {
+  public void launchLibreOffice(String cmisUrl, String repositoryId, String filePath, String webdavUrl) {
 
     Runtime rt = Runtime.getRuntime();
     try {
-      String params = LibreOfficeLauncherHelper.generateLibreOfficeOpenUrl(cmisUrl, repositoryId, filePath);
+      String params;
+      if (null != webdavUrl && webdavUrl.length() > 0) {
+        params = LibreOfficeLauncherHelper.generateLibreOfficeWebdavOpenUrl(webdavUrl);
+      } else {
+        params = LibreOfficeLauncherHelper.generateLibreOfficeCmisOpenUrl(cmisUrl, repositoryId, filePath);
+      }
       StringBuffer cmd = new StringBuffer();
       try {
         String[] binaryLocations = { "/Applications/LibreOffice.app/Contents/MacOS/soffice" };
-        cmd.append(binaryLocations[0] + " " + params);       
-        System.out.println("Command: " + cmd.toString());       
+        cmd.append(binaryLocations[0] + " " + params);
+        System.out.println("Command: " + cmd.toString());
         rt.exec(cmd.toString());
 
         System.out.println("Process started");

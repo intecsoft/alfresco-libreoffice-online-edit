@@ -18,3 +18,4 @@ tomcat-home
 *.iml
 *.ipr
 *.iws
+.idea/
